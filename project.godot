@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="siege-4"
-run/main_scene="uid://chm3si0nicqxd"
+config/name="siege-5"
+run/main_scene="uid://dxycgxp18qyay"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

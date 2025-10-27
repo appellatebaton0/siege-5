@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxycgxp18qyay"]
+
+[ext_resource type="Script" uid="uid://cvqf1hrebc04p" path="res://scripts/bot.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://b6iakww8271ns" path="res://scripts/bits/movemaster3d.gd" id="2_sugp2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jyhfs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tbgi4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tefeu"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="Gradient" id="Gradient_o6xl0"]
+offsets = PackedFloat32Array(0, 0.397541, 0.5081967, 0.6639344)
+colors = PackedColorArray(0, 0, 0, 1, 0.26193392, 0.33743787, 1, 1, 0.9861278, 0.33233973, 0.67364097, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tipki"]
+gradient = SubResource("Gradient_o6xl0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85g3d"]
+albedo_texture = SubResource("GradientTexture2D_tipki")
+
+[sub_resource type="BoxMesh" id="BoxMesh_choun"]
+material = SubResource("StandardMaterial3D_85g3d")
+size = Vector3(20, 1, 20)
+
+[node name="Main" type="Node"]
+
+[node name="Player" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1423271, 0)
+script = ExtResource("1_0wfyh")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Player"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_jyhfs")
+
+[node name="MoveMasterBit3D" type="Node" parent="Player/CharacterBody3D"]
+script = ExtResource("2_sugp2")
+metadata/_custom_type_script = "uid://b6iakww8271ns"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_tbgi4")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5702342)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_tefeu")
+
+[node name="CollisionShape3D2" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_choun")
