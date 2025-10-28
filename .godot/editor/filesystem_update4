@@ -1,2 +1,4 @@
 res://scenes/main.tscn
-res://scripts/bits/camera3d.gd
+res://scripts/bits/input.gd
+res://scripts/values/property.gd
+res://scripts/values/bool/cast.gd

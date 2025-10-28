@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1761578739
+::res://::1761667195
 export_presets.cfg::TextFile::-1::1760967020::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::4744890908149696779::1760455214::1761568646::1::::<><><>0<>0<>74f10d8cd2d878a787c0906b66aabf09<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1761567731::0::1::::<><><>0<>0<><>::
@@ -16,14 +16,15 @@ utils.gd::GDScript::5251015809120159908::1760455214::0::1::::<>RefCounted<><>0<>
 ::res://assets/::1761567625
 ::res://assets/textures/::1760967066
 ::res://builds/::1761567640
-::res://scenes/::1761568672
-main.tscn::PackedScene::8823283902035641224::1761568672::0::1::::<><><>0<>0<><>::
+::res://scenes/::1761655622
+main.tscn::PackedScene::8823283902035641224::1761655622::0::1::::<><><>0<>0<><>::uid://cvqf1hrebc04p::::res://scripts/bot.gd<>uid://b6iakww8271ns::::res://scripts/bits/movemaster3d.gd<>uid://djhmxrvyb8qik::::res://scripts/bits/camera3d.gd<>uid://b1o48vkwquyxs::::res://scripts/values/node/manual_node.gd
 ::res://scripts/::1761314785
 bot.gd::GDScript::6280187537563510829::1761314785::0::1::::Bot<>Node<><>0<>0<><>::
-::res://scripts/bits/::1761567613
+::res://scripts/bits/::1761655797
 add.gd::GDScript::5267308872797563745::1760967020::0::1::::AddBit<>Bit<><>0<>0<><>::
 areamaster2D.gd::GDScript::8839025531821050892::1761327893::0::1::::AreaMasterBit2D<>Bit<><>0<>0<><>::
 bit.gd::GDScript::9189365856777860842::1761314789::0::1::::Bit<>Bot<><>1<>0<><>::
+camera3d.gd::GDScript::7806182891703970738::1761655797::0::1::::CameraBit3D<>Bit<><>0<>0<><>::
 condition.gd::GDScript::4424101939615924315::1760967020::0::1::::ConditionBit<>Bit<><>0<>0<><>::
 delete.gd::GDScript::894186677461777162::1760967020::0::1::::DeleteBit<>Bit<><>0<>0<><>::
 health.gd::GDScript::8988301659056664802::1761330776::0::1::::HealthBit<>Bit<><>0<>0<><>::
