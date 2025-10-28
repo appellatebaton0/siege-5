@@ -13,7 +13,11 @@ func _ready() -> void:
 
 func value() -> Variant:
 	if property != null and from != null:
-		if property.contains("()"):
+		
+		# If it's a call return the call.
+		if "()" in property:
 			return from.value().call(property.replace("()", ""))
+		
+		# Otherwise, return the property.
 		return from.value().get(property)
 	return null

@@ -6,7 +6,10 @@ class_name CameraBit3D extends Bit
 ## The node to pass the X rotation to
 @export var x_target:NodeValue
 
-@export var sensitivity:float = 5
+## The sensitivity of the rotation.
+@export var sensitivity:float = 4
+## Whether to only apply the rotation if the mouse is captured.
+@export var must_be_captured := true
 
 func set_valid(value:NodeValue, amount:Vector3):
 	if value != null:
@@ -17,6 +20,7 @@ func set_valid(value:NodeValue, amount:Vector3):
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		set_valid(x_target, Vector3(event.relative.y * 0.001 * sensitivity, 0, 0))
-		set_valid(y_target, Vector3(0, event.relative.x * 0.001 * sensitivity, 0))
+		if not must_be_captured or Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			set_valid(x_target, Vector3(-event.relative.y * 0.001 * sensitivity, 0, 0))
+			set_valid(y_target, Vector3(0, -event.relative.x * 0.001 * sensitivity, 0))
 		

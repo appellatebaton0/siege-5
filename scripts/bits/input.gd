@@ -14,6 +14,8 @@ signal just_false ## Emitted when input's pressed and condition's true
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(input):
 		
+		print(condition.value())
+		
 		## If the condition exists, do what is required.
 		if condition != null:
 			var value := condition.value()

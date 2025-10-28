@@ -1,4 +1,3 @@
 res://scenes/main.tscn
-res://scripts/bits/input.gd
-res://scripts/values/property.gd
-res://scripts/values/bool/cast.gd
+res://scripts/bits/mouse_capture.gd
+res://scripts/bits/camera3d.gd
