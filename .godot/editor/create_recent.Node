@@ -1,4 +1,5 @@
 Node
+DirectionalLight3D
 BitNode
 NotBool
 CastBool
@@ -11,4 +12,3 @@ AnimationPlayer
 Panel
 CanvasLayer
 CharacterBody3D
-MoveMasterBit3D

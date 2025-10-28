@@ -15,7 +15,10 @@ func set_valid(value:NodeValue, amount:Vector3):
 	if value != null:
 		var node = value.value()
 		if node is Node3D:
-			node.rotation += amount
+			var next_rotation:Vector3 = (node.rotation + amount)
+			next_rotation.x = clamp(next_rotation.x, deg_to_rad(0), deg_to_rad(180))
+			
+			node.rotation = next_rotation
 
 
 func _input(event: InputEvent) -> void:

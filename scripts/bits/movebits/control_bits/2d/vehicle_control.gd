@@ -1,4 +1,4 @@
-class_name VehicleControlBit extends ControlBit
+class_name VehicleControlBit extends ControlBit2D
 ## Allows for a bot to be controlled like a top-down vehicle; inputs to turn L/R, and move forwards and backwards.
 
 @export_group("Rotation", "rotation_")

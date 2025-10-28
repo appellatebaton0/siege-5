@@ -1,4 +1,4 @@
-class_name FloatControlBit extends ControlBit
+class_name FloatControlBit extends ControlBit2D
 ## Allows for controlling the Bot like it's floating. (Top down)
 ## NOTE: Make sure the CharacterBody is on the Floating motion_mode.
 

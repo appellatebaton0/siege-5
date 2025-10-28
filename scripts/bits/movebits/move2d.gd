@@ -8,7 +8,7 @@ func get_master() -> MoveMasterBit2D:
 	if parent is MoveMasterBit2D:
 		return parent
 	
-	for child in get_parent().get_children():
+	for child in parent.get_children():
 		if child is MoveMasterBit2D:
 			return child
 	

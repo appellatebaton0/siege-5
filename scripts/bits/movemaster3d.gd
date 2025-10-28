@@ -8,12 +8,17 @@ class_name MoveMasterBit3D extends Bit
 var current_bit:MoveBit
 
 ## All the childed bits.
-var bits:Array[MoveBit] = get_move_bits()
+@onready var bits:Array[MoveBit] = get_move_bits()
 func get_move_bits() -> Array[MoveBit]:
 	var response_bits:Array[MoveBit]
 	
 	# Append any children that are MoveBits.
 	for child in get_children():
+		if child is MoveBit:
+			response_bits.append(child)
+	
+	# Append any siblings that are MoveBits.
+	for child in get_parent().get_children():
 		if child is MoveBit:
 			response_bits.append(child)
 	
@@ -43,39 +48,34 @@ func _ready() -> void:
 		if me is CharacterBody3D:
 			mover = me
 	
-	if initial_bit == null:
-		for child in get_children():
-			if child is MoveBit:
-				initial_bit = child
-				break
+	if initial_bit == null and len(bits) > 0:
+		initial_bit = bits[0]
 	
 	if initial_bit != null:
 		change_bit(initial_bit)
 
 func _process(delta: float) -> void:
-	# Run the active bit.
-	if current_bit != null:
-		current_bit.active(delta)
-	
-	# Run all the inactive bits.
+	# Run all bits' appropriate functions.
 	for bit in bits:
-		if bit != current_bit:
+		# If it's always running, or is the one that should be.
+		if not bit.exclusive or bit == current_bit:
+			bit.active(delta)
+		else:
 			bit.inactive(delta)
 
 func _physics_process(delta: float) -> void:
-	# Run the physically active bit.
-	if current_bit != null:
-		current_bit.phys_active(delta)
-	
-	# Run all the physically inactive bits.
+	# Run all bits' appropriate functions.
 	for bit in bits:
-		if bit != current_bit:
+		# If it's always running, or is the one that should be.
+		if not bit.exclusive or bit == current_bit:
+			bit.phys_active(delta)
+		else:
 			bit.phys_inactive(delta)
 	
 	## Run on mover
 	if mover != null:
 		mover.move_and_slide()
 		# Pass to the bot.
-		if bot.is_class("Node2D"):
+		if bot.is_class("Node3D"):
 			bot.global_position = mover.global_position
 			mover.position = Vector3.ZERO

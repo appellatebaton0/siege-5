@@ -1,3 +1,12 @@
 res://scenes/main.tscn
 res://scripts/bits/mouse_capture.gd
 res://scripts/bits/camera3d.gd
+res://scripts/bits/input.gd
+res://scripts/bits/movebits/control.gd
+res://scripts/bits/movebits/control_bits/platformer3d.gd
+res://scripts/bits/movebits/control3d.gd
+res://scripts/bits/movebits/control_bits/2d/float_control.gd
+res://scripts/bits/movebits/control_bits/2d/vehicle_control.gd
+res://scripts/bits/movemaster3d.gd
+res://scripts/bits/movebits/move2d.gd
+res://scripts/bits/movebits/move3d.gd
