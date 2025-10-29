@@ -10,3 +10,8 @@ res://scripts/bits/movebits/control_bits/2d/vehicle_control.gd
 res://scripts/bits/movemaster3d.gd
 res://scripts/bits/movebits/move2d.gd
 res://scripts/bits/movebits/move3d.gd
+res://assets/resources/meshlib.tres
+res://script_templates/ControlBit3D/controlbit_template.gd
+res://script_templates/ControlBit2D/controlbit_template.gd
+res://scripts/bits/movebits/control_bits/3d/wall_jump.gd
+res://scenes/mesh_lib.tscn

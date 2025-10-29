@@ -6,6 +6,9 @@ class_name CameraBit3D extends Bit
 ## The node to pass the X rotation to
 @export var x_target:NodeValue
 
+## The angles to clamp the x rotation to.
+@export var x_clamp := Vector2(-90, 90)
+
 ## The sensitivity of the rotation.
 @export var sensitivity:float = 4
 ## Whether to only apply the rotation if the mouse is captured.
@@ -16,7 +19,7 @@ func set_valid(value:NodeValue, amount:Vector3):
 		var node = value.value()
 		if node is Node3D:
 			var next_rotation:Vector3 = (node.rotation + amount)
-			next_rotation.x = clamp(next_rotation.x, deg_to_rad(0), deg_to_rad(180))
+			next_rotation.x = clamp(next_rotation.x, deg_to_rad(x_clamp.x), deg_to_rad(x_clamp.y))
 			
 			node.rotation = next_rotation
 

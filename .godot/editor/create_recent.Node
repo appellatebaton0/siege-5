@@ -1,4 +1,9 @@
 Node
+WorldEnvironment
+CollisionShape3D
+StaticBody3D
+MeshInstance3D
+GridMap
 DirectionalLight3D
 BitNode
 NotBool
@@ -7,8 +12,3 @@ ManualNode
 Property
 PropertyModifier
 PlayerAnimatorBit
-Control
-AnimationPlayer
-Panel
-CanvasLayer
-CharacterBody3D

@@ -1,4 +1,4 @@
-class_name ExampleControlBit extends ControlBit
+class_name ExampleControlBit3D extends ControlBit3D
 ## What do I do?
 
 func on_active() -> void:
