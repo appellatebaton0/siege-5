@@ -12,8 +12,10 @@ albedo_texture = SubResource("GradientTexture2D_dpqbj")
 
 [sub_resource type="BoxMesh" id="BoxMesh_djix4"]
 material = SubResource("StandardMaterial3D_x65au")
+size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dpqbj"]
+size = Vector3(2, 2, 2)
 
 [node name="Node3D" type="Node3D"]
 

@@ -28,14 +28,14 @@ func phys_active(delta:float) -> void:
 	
 	# Coyote Time
 	coyote_timer = move_toward(coyote_timer, 0, delta)
+	jump_buffer = move_toward(jump_buffer, 0, delta)
 	if master.mover.is_on_wall_only():
 		coyote_timer = coyote_time
 		last_wall_normal = master.mover.get_wall_normal()
 	
-	# Jump Buffering
-	jump_buffer = move_toward(jump_buffer, 0, delta)
-	if Input.is_action_just_pressed(inputs[inp.up]):
-		jump_buffer = jump_buffering
+		# Jump Buffering
+		if Input.is_action_just_pressed(inputs[inp.up]):
+			jump_buffer = jump_buffering
 	
 	# If can wall jump, and trying to, do so.
 	if coyote_timer > 0.0 and jump_buffer > 0.0 and cooldown_timer <= 0.0:
