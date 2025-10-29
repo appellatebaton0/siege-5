@@ -39,6 +39,7 @@ func phys_active(delta:float) -> void:
 	if master.mover.is_on_floor():
 		coyote_timer = l_coyote_time
 	
+	
 	# Add gravity.
 	else:
 		master.mover.velocity += vertical_gravity_scale * master.mover.get_gravity() * delta

@@ -253,9 +253,8 @@ script = ExtResource("3_ya4ey")
 
 [node name="WallJump" type="Node" parent="Player/CharacterBody3D"]
 script = ExtResource("4_trceg")
-inputs = null
+cooldown = 0.1
 exclusive = false
-isolated = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
 mesh = SubResource("CapsuleMesh_tbgi4")
