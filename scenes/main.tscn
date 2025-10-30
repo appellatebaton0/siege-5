@@ -325,7 +325,7 @@ mesh = SubResource("BoxMesh_ya4ey")
 
 [node name="HealthBit" type="Node" parent="Player"]
 script = ExtResource("8_jkv2x")
-invincibility_time = 0.2
+invincibility_time = 0.3
 metadata/_custom_type_script = "uid://d1caarqf4qo63"
 
 [node name="Label3D" type="Label3D" parent="Player"]
@@ -375,10 +375,10 @@ skeleton = NodePath("../..")
 script = ExtResource("2_sugp2")
 metadata/_custom_type_script = "uid://b6iakww8271ns"
 
-[node name="Node" type="Node" parent="Ghost/CharacterBody3D"]
+[node name="FollowPlayer" type="Node" parent="Ghost/CharacterBody3D"]
 script = ExtResource("9_muem4")
 
-[node name="GroupNode" type="Node" parent="Ghost/CharacterBody3D/Node"]
+[node name="GroupNode" type="Node" parent="Ghost/CharacterBody3D/FollowPlayer"]
 script = ExtResource("10_dp3eg")
 group_name = "Player"
 metadata/_custom_type_script = "uid://bslmamakq2ao5"

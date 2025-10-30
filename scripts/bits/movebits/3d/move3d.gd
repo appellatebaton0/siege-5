@@ -14,3 +14,6 @@ func get_master() -> MoveMasterBit3D:
 			return child
 	
 	return null
+
+func vec3_move_towards(from:Vector3, to:Vector3, delta:float):
+	return Vector3(move_toward(from.x, to.x, delta), move_toward(from.y, to.y, delta), move_toward(from.z, to.z, delta))

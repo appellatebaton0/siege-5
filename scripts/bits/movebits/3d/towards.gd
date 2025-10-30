@@ -16,10 +16,10 @@ func _ready() -> void:
 				target = child
 				break
 
-func phys_active(_delta:float) -> void:
+func phys_active(delta:float) -> void:
 	if target != null:
 		var node = target.value()
 		if node is Node3D:
 			var direction = master.mover.global_position.direction_to(node.global_position)
 			
-			master.mover.velocity = direction * 10
+			master.mover.velocity = vec3_move_towards(master.mover.velocity, direction * max_speed, acceleration * delta)
