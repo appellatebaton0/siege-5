@@ -67,8 +67,12 @@ up={
 [layer_names]
 
 2d_physics/layer_1="Player"
+3d_physics/layer_1="Environment"
 2d_physics/layer_2="Enemy"
+3d_physics/layer_2="Player"
 2d_physics/layer_3="Environment"
+3d_physics/layer_3="Ghost"
+3d_physics/layer_4="Bullet"
 
 [rendering]
 
