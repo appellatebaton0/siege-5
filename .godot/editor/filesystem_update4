@@ -3,3 +3,4 @@ res://assets/resources/meshlib.tres
 res://scripts/bits/areabits/3d/damage/damage3d.gd
 res://scripts/bits/movebits/3d/move3d.gd
 res://scripts/bits/movebits/3d/towards.gd
+res://scripts/bits/look.gd

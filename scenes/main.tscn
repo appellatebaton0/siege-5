@@ -17,7 +17,9 @@
 [ext_resource type="Script" uid="uid://bfbj8ldbofwrv" path="res://scripts/bits/movebits/3d/towards.gd" id="9_muem4"]
 [ext_resource type="Script" uid="uid://dk0hts3twf6t" path="res://scripts/bits/mouse_capture.gd" id="10_choun"]
 [ext_resource type="Script" uid="uid://bslmamakq2ao5" path="res://scripts/values/node/group_node.gd" id="10_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://bql362pgikgix" path="res://assets/models/ghost.glb" id="11_jscy8"]
 [ext_resource type="MeshLibrary" uid="uid://x7sfll6d0mch" path="res://assets/resources/meshlib.tres" id="12_eb6dy"]
+[ext_resource type="Script" uid="uid://cg7bjyxfxe0nm" path="res://scripts/bits/look.gd" id="12_pm3ni"]
 [ext_resource type="Script" uid="uid://bmbnethi8oyh3" path="res://scripts/bits/areamaster3D.gd" id="13_0ld40"]
 [ext_resource type="Script" uid="uid://jcrs4htu8ysk" path="res://scripts/bits/areabits/3d/damage/single.gd" id="14_gqmmt"]
 
@@ -31,15 +33,6 @@ height = 3.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_ya4ey"]
 size = Vector3(0.1, 0.1, 0.3)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_jkv2x"]
-top_radius = 0.7
-bottom_radius = 0.7
-height = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_jbj1t"]
-radius = 0.7
-height = 1.4
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dp3eg"]
 height = 1.7
@@ -303,7 +296,6 @@ mesh = SubResource("BoxMesh_ya4ey")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player/Head" node_paths=PackedStringArray("y_target", "x_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.891436)
 script = ExtResource("3_sugp2")
 y_target = NodePath("Player")
 x_target = NodePath("Head")
@@ -357,17 +349,21 @@ metadata/_custom_type_script = "uid://b1o48vkwquyxs"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.68195844, 0)
 script = ExtResource("1_0wfyh")
 
-[node name="Body" type="Node3D" parent="Ghost"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ghost/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("CylinderMesh_jkv2x")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ghost/Body"]
+[node name="ghost" parent="Ghost" instance=ExtResource("11_jscy8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("SphereMesh_jbj1t")
-skeleton = NodePath("../..")
+
+[node name="LookBit" type="Node" parent="Ghost/ghost"]
+script = ExtResource("12_pm3ni")
+
+[node name="From" type="Node" parent="Ghost/ghost/LookBit" node_paths=PackedStringArray("response")]
+script = ExtResource("4_jyhfs")
+response = NodePath("../..")
+metadata/_custom_type_script = "uid://b1o48vkwquyxs"
+
+[node name="To" type="Node" parent="Ghost/ghost/LookBit"]
+script = ExtResource("10_dp3eg")
+group_name = "Player"
+metadata/_custom_type_script = "uid://bslmamakq2ao5"
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="Ghost"]
 
