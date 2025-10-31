@@ -99,7 +99,7 @@ script = ExtResource("1_q66a6")
 
 [node name="LookBit" type="Node" parent="."]
 script = ExtResource("2_6ek3p")
-turn_speed = 5.0
+turn_lerp = 0.1
 
 [node name="From" type="Node" parent="LookBit" node_paths=PackedStringArray("response")]
 script = ExtResource("3_rtpxv")

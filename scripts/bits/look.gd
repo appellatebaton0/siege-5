@@ -8,7 +8,9 @@ class_name LookBit extends Bit
 @export var to:NodeValue
 
 ## The speed with which to turn to look at the player, in degrees per second.
-@export var turn_speed := 1000.0
+@export var turn_speed := 0.0
+## The amount to lerp between the current rotation and the look rotation, 0 being none and 1 being instant.
+@export_range(0.0, 1.0, 0.001) var turn_lerp := 1.0
 
 ## The axis to apply the look to.
 @export_group("Axes", "look_")
@@ -56,6 +58,7 @@ func _process(delta: float) -> void:
 				# Get the desired ending rotation
 				f_node.look_at(t_node.global_position)
 				var look_rotation = f_node.rotation
+				f_node.rotation = regular_rotation
 				
 				# Apply the necessary rotations
 				var real_rotation = regular_rotation
@@ -84,4 +87,10 @@ func _process(delta: float) -> void:
 					else:
 						real_rotation.z += deg_to_rad(360)
 				
-				f_node.rotation = vec3_move_towards(regular_rotation, real_rotation, turn_speed * delta)
+				if turn_speed != 0 and turn_lerp != 0:
+					f_node.rotation = lerp(regular_rotation, real_rotation, turn_lerp)
+					f_node.rotation = vec3_move_towards(f_node.rotation, real_rotation, turn_speed * delta)
+				elif turn_speed != 0:
+					f_node.rotation = vec3_move_towards(regular_rotation, real_rotation, turn_speed * delta)
+				elif turn_lerp != 0:
+					f_node.rotation = lerp(regular_rotation, real_rotation, turn_lerp)

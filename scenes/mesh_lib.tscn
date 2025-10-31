@@ -1,23 +1,7 @@
 [gd_scene load_steps=11 format=4 uid="uid://dnn2uf47uy4s1"]
 
 [ext_resource type="Texture2D" uid="uid://c4lx6iikkgu6k" path="res://assets/models/slope_slope.png" id="1_dpqbj"]
-
-[sub_resource type="Gradient" id="Gradient_djix4"]
-offsets = PackedFloat32Array(0.029411765, 1)
-colors = PackedColorArray(0.0018382657, 8.4228816e-08, 0.03266721, 1, 0.10934884, 6.321974e-05, 0.36801523, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dpqbj"]
-gradient = SubResource("Gradient_djix4")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x65au"]
-albedo_texture = SubResource("GradientTexture2D_dpqbj")
-
-[sub_resource type="BoxMesh" id="BoxMesh_djix4"]
-material = SubResource("StandardMaterial3D_x65au")
-size = Vector3(2, 2, 2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dpqbj"]
-size = Vector3(2, 2, 2)
+[ext_resource type="Texture2D" uid="uid://bfwu4cjxd7hll" path="res://assets/models/brick_brick.png" id="2_x65au"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bj0a6"]
 resource_name = "Material.001"
@@ -60,17 +44,48 @@ shadow_mesh = SubResource("ArrayMesh_epn26")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x65au"]
 points = PackedVector3Array(-0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yyi75"]
+resource_name = "Material"
+cull_mode = 2
+albedo_texture = ExtResource("2_x65au")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jo47w"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAAAEAAEAAwAFAAIABQAAAAIABgAEAAAABQAGAAAABwABAAQABwADAAEABgAHAAQABQADAAcABQAHAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAAAAP////8AAAAA//8AAAAAAAAAAP//AAD///////8AAAAAAAAAAAAA//8AAAAAAAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_erwk5"]
+resource_name = "brick_Cube"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("VFX//wAAqqpUVaqqAAD//1RVVFUAAKmqAABVVVRVqaqpqqqqVVX//1VVqqqpqv7/qqqpqlVVVVWpqlRVVVWpqlRVAAAAAFVVAAAAAFRVVFWpqgAAVVVUVVVVAACqqlRV"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_yyi75"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAVNUAAP////9U1QAA//8AAFTV////////VNX//wAA////vwAA//////+//////////78AAAAA////vwAAAAD//1TVAAD//wAAVNUAAP////9U1QAAAAAAAFTVAAAAAAAAVNX//wAA//9U1f//AAAAAFTVAAAAAP//VNX//wAAAABU1f///////1TV/////wAAVNX//wAA//9U1QAAAAAAAP///////wAA//8AAP//AAD/////AAAAAP//VNWqKlTVqipU1aoqVNWqKv9//3//f/9//3//f/9//39UVamqVFWpqlRVqapUVamqVVVUVVVVVFVVVVRVVFVUVaqqVVWqqlVVqqpUVaqqVVX/v/8//7//P/+//z//P/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_jo47w")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2dq2c"]
+size = Vector3(2, 2, 2)
+
 [node name="Node3D" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("BoxMesh_djix4")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-collision_mask = 11
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("BoxShape3D_dpqbj")
 
 [node name="Slope" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -83,3 +98,13 @@ collision_mask = 11
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Slope/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_x65au")
 debug_color = Color(1, 1, 1, 1)
+
+[node name="Bricks" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_erwk5")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Bricks"]
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bricks/StaticBody3D"]
+shape = SubResource("BoxShape3D_2dq2c")
