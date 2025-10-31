@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsmi1y0f5shjd"
-path.s3tc="res://.godot/imported/slope.png-2ea368f942f1f1c99e3ea8683bd12cc3.s3tc.ctex"
+uid="uid://c4lx6iikkgu6k"
+path.s3tc="res://.godot/imported/slope_slope.png-c749dc377cd1bff0a76a8cf5ed7553a9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "c4d9304dc74ec3179505d72c00d6c3b4"
+}
 
 [deps]
 
-source_file="res://assets/textures/slope.png"
-dest_files=["res://.godot/imported/slope.png-2ea368f942f1f1c99e3ea8683bd12cc3.s3tc.ctex"]
+source_file="res://assets/models/slope_slope.png"
+dest_files=["res://.godot/imported/slope_slope.png-c749dc377cd1bff0a76a8cf5ed7553a9.s3tc.ctex"]
 
 [params]
 

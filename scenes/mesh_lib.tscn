@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnn2uf47uy4s1"]
+[gd_scene load_steps=11 format=4 uid="uid://dnn2uf47uy4s1"]
+
+[ext_resource type="Texture2D" uid="uid://c4lx6iikkgu6k" path="res://assets/models/slope_slope.png" id="1_dpqbj"]
 
 [sub_resource type="Gradient" id="Gradient_djix4"]
 offsets = PackedFloat32Array(0.029411765, 1)
@@ -17,12 +19,67 @@ size = Vector3(2, 2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_dpqbj"]
 size = Vector3(2, 2, 2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bj0a6"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_dpqbj")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_epn26"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIAAwAAAAQAAQAEAAIAAwAEAAUAAQAFAAQAAwAFAAEA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a1msb"]
+resource_name = "slope_Cube_001"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("y7jHBUleSWBJXscFy7hJYHRbV2DxANQFdFvUBfEAV2DVAnvmV117Zldde+bVAntmWr3wTVr98I1avfDNMLwxQzD8MgMw/DGD"),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADwAQABEA"),
+"material": SubResource("StandardMaterial3D_bj0a6"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAABU1f//AAD//1TV//8AAAAAVNUAAAAA//9U1QAA//8AAKrp//8AAP//qukAAP////+q6f//AAAAAKrp//8AAP///98AAAAA////3wAA///////fAAAAAAAA/////wAAAAD//wAA//8AAP//VFWqqlRVqqpUVaqqVFWpqlRVVFVUVVRVVFVUVVVVVFUEtfWVBLX1lQS19ZUEtfWV/3//f/9//3//f/9/gdp8pYHafKWB2nyl")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_epn26")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x65au"]
+points = PackedVector3Array(-0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_djix4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+collision_mask = 11
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_dpqbj")
+
+[node name="Slope" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("ArrayMesh_a1msb")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Slope"]
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_x65au")
+debug_color = Color(1, 1, 1, 1)

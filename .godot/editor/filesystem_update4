@@ -1,3 +1,5 @@
 res://scenes/main.tscn
 res://assets/resources/meshlib.tres
 res://scripts/bits/look.gd
+res://scenes/mesh_lib.tscn
+res://scenes/ghosts/ghost.tscn

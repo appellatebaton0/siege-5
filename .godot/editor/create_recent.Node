@@ -1,3 +1,5 @@
+CollisionShape3D
+StaticBody3D
 GroupNode
 ManualNode
 Node
@@ -5,10 +7,8 @@ SingleDamage3D
 SingleDamage2D
 AreaMasterBit3D
 AreaMasterBit2D
-CollisionShape3D
 Area3D
 Property
 BitValue
 PropertyModifier
 MoveMasterBit3D
-CharacterBody3D
