@@ -1,0 +1,119 @@
+[gd_scene load_steps=14 format=3 uid="uid://bxd8ic56rg4x4"]
+
+[ext_resource type="Script" uid="uid://cvqf1hrebc04p" path="res://scripts/bot.gd" id="1_y4r1p"]
+[ext_resource type="Script" uid="uid://b6iakww8271ns" path="res://scripts/bits/movemaster3d.gd" id="2_d2wvv"]
+[ext_resource type="Script" uid="uid://cw1ibpybypc2" path="res://scripts/bits/movebits/3d/controlbits/platformer.gd" id="3_3v2ag"]
+[ext_resource type="Script" uid="uid://4otg5dsd8uso" path="res://scripts/bits/movebits/3d/controlbits/wall_jump.gd" id="4_jej6c"]
+[ext_resource type="Script" uid="uid://ctf2a2d7waikj" path="res://scripts/bits/movebits/3d/controlbits/wall_slide.gd" id="5_f1ej7"]
+[ext_resource type="Script" uid="uid://djhmxrvyb8qik" path="res://scripts/bits/camera3d.gd" id="6_oprun"]
+[ext_resource type="Script" uid="uid://b1o48vkwquyxs" path="res://scripts/values/node/manual_node.gd" id="7_a8ls1"]
+[ext_resource type="Script" uid="uid://d1caarqf4qo63" path="res://scripts/bits/health.gd" id="8_qfm1y"]
+[ext_resource type="Script" uid="uid://bc87fqj83okns" path="res://scripts/bits/property_modifier.gd" id="9_fulsm"]
+[ext_resource type="Script" uid="uid://d7n7ctdl2nsg" path="res://scripts/values/property.gd" id="10_4r5pv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jyhfs"]
+radius = 0.7
+height = 3.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tbgi4"]
+radius = 0.7
+height = 3.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_ya4ey"]
+size = Vector3(0.1, 0.1, 0.3)
+
+[node name="Player" type="Node3D" groups=["Player"]]
+script = ExtResource("1_y4r1p")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_jyhfs")
+
+[node name="MoveMasterBit3D" type="Node" parent="CharacterBody3D"]
+script = ExtResource("2_d2wvv")
+metadata/_custom_type_script = "uid://b6iakww8271ns"
+
+[node name="Platformer3D" type="Node" parent="CharacterBody3D"]
+script = ExtResource("3_3v2ag")
+horizontal_acceleration = 60.0
+horizontal_air_acceleration = 30.0
+horizontal_max_speed = 20.0
+horizontal_air_friction = 10.0
+vertical_jump_velocity = 17.0
+vertical_gravity_scale = 3.0
+
+[node name="WallJump" type="Node" parent="CharacterBody3D"]
+script = ExtResource("4_jej6c")
+vertical_velocity = 15.0
+horizontal_velocity = 15.0
+cooldown = 0.1
+exclusive = false
+
+[node name="WallSlide" type="Node" parent="CharacterBody3D"]
+script = ExtResource("5_f1ej7")
+slide_speed = 60.0
+exclusive = false
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_tbgi4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5026072, -0.5354805)
+visible = false
+mesh = SubResource("BoxMesh_ya4ey")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" node_paths=PackedStringArray("y_target", "x_target")]
+script = ExtResource("6_oprun")
+y_target = NodePath("Player")
+x_target = NodePath("Head")
+
+[node name="Head" type="Node" parent="Head/Camera3D" node_paths=PackedStringArray("response")]
+script = ExtResource("7_a8ls1")
+response = NodePath("../..")
+metadata/_custom_type_script = "uid://b1o48vkwquyxs"
+
+[node name="Player" type="Node" parent="Head/Camera3D" node_paths=PackedStringArray("response")]
+script = ExtResource("7_a8ls1")
+response = NodePath("../../..")
+metadata/_custom_type_script = "uid://b1o48vkwquyxs"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0013391972, -0.5354805)
+visible = false
+mesh = SubResource("BoxMesh_ya4ey")
+
+[node name="HealthBit" type="Node" parent="."]
+script = ExtResource("8_qfm1y")
+invincibility_time = 0.3
+metadata/_custom_type_script = "uid://d1caarqf4qo63"
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1361012, 0)
+text = "WHUwrt"
+
+[node name="PropertyModifier" type="Node" parent="Label3D"]
+script = ExtResource("9_fulsm")
+property = "text"
+constant = true
+metadata/_custom_type_script = "uid://bc87fqj83okns"
+
+[node name="ManualNode" type="Node" parent="Label3D/PropertyModifier" node_paths=PackedStringArray("response")]
+script = ExtResource("7_a8ls1")
+response = NodePath("../..")
+metadata/_custom_type_script = "uid://b1o48vkwquyxs"
+
+[node name="Property" type="Node" parent="Label3D/PropertyModifier"]
+script = ExtResource("10_4r5pv")
+property = "health"
+metadata/_custom_type_script = "uid://d7n7ctdl2nsg"
+
+[node name="ManualNode" type="Node" parent="Label3D/PropertyModifier/Property" node_paths=PackedStringArray("response")]
+script = ExtResource("7_a8ls1")
+response = NodePath("../../../../HealthBit")
+metadata/_custom_type_script = "uid://b1o48vkwquyxs"

@@ -7,11 +7,17 @@ class_name LookBit extends Bit
 ## The node to make it look at.
 @export var to:NodeValue
 
+## The speed with which to turn to look at the player, in degrees per second.
+@export var turn_speed := 1000.0
+
 ## The axis to apply the look to.
 @export_group("Axes", "look_")
 @export var look_x := true
 @export var look_y := true
 @export var look_z := true
+
+func vec3_move_towards(a:Vector3, b:Vector3, delta:float):
+	return Vector3(move_toward(a.x, b.x, delta), move_toward(a.y, b.y, delta), move_toward(a.z, b.z, delta))
 
 func _ready() -> void:
 	for child in get_children():
@@ -21,7 +27,7 @@ func _ready() -> void:
 			elif to == null:
 				to = child
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if from != null and to != null:
 		var f_node = from.value()
 		var t_node = to.value()
@@ -44,13 +50,14 @@ func _process(_delta: float) -> void:
 				f_node.rotation = real_rotation
 		elif f_node is Node3D:
 			if t_node is Node3D:
+				# Get the starting rotation
 				var regular_rotation = f_node.rotation
 				
+				# Get the desired ending rotation
 				f_node.look_at(t_node.global_position)
-				
 				var look_rotation = f_node.rotation
 				
-				## Apply the necessary rotations
+				# Apply the necessary rotations
 				var real_rotation = regular_rotation
 				if look_x:
 					real_rotation.x = look_rotation.x
@@ -59,4 +66,22 @@ func _process(_delta: float) -> void:
 				if look_z:
 					real_rotation.z = look_rotation.z
 				
-				f_node.rotation = real_rotation
+				## Fix not taking the shortest path, by altering the rotation 360* to match.
+				var distances = real_rotation - regular_rotation
+				if abs(distances.x) > deg_to_rad(180): # Fix X axis if the distance is more than needed
+					if distances.x > 0:
+						real_rotation.x -= deg_to_rad(360)
+					else:
+						real_rotation.x += deg_to_rad(360)
+				if abs(distances.y) > deg_to_rad(180): # Fix Y axis if the distance is more than needed
+					if distances.y > 0:
+						real_rotation.y -= deg_to_rad(360)
+					else:
+						real_rotation.y += deg_to_rad(360)
+				if abs(distances.z) > deg_to_rad(180): # Fix Z axis if the distance is more than needed
+					if distances.z > 0:
+						real_rotation.z -= deg_to_rad(360)
+					else:
+						real_rotation.z += deg_to_rad(360)
+				
+				f_node.rotation = vec3_move_towards(regular_rotation, real_rotation, turn_speed * delta)
