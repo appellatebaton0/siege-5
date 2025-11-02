@@ -1,3 +1,8 @@
+ProgressBar
+MarginContainer
+Control
+CanvasLayer
+CanvasGroup
 ManualNode
 GroupNode
 DeleteBit
@@ -8,7 +13,3 @@ AndBool
 ManualPackedScene
 AddBit
 Node
-Label
-VBoxContainer
-Button
-MarginContainer

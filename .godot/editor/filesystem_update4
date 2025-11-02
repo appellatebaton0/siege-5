@@ -4,3 +4,4 @@ res://scripts/bits/input.gd
 res://scripts/bits/player_animator.gd
 res://scenes/player.tscn
 res://scripts/bits/delete.gd
+res://scenes/level.tscn
