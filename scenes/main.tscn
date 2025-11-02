@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxycgxp18qyay"]
+[gd_scene load_steps=23 format=3 uid="uid://dxycgxp18qyay"]
 
 [ext_resource type="PackedScene" uid="uid://b3gr5rbtu1ff" path="res://scenes/level.tscn" id="1_ya4ey"]
 [ext_resource type="Script" uid="uid://nege5nk1sa8u" path="res://scripts/values/bool/and.gd" id="3_eb6dy"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://dk0hts3twf6t" path="res://scripts/bits/mouse_capture.gd" id="10_choun"]
 [ext_resource type="Script" uid="uid://bslmamakq2ao5" path="res://scripts/values/node/group_node.gd" id="10_dp3eg"]
 [ext_resource type="Script" uid="uid://b55vjdqvt4nkj" path="res://scripts/values/packed_scene/manual_packedscene.gd" id="13_jbj1t"]
+[ext_resource type="Script" uid="uid://b7ecah37jx738" path="res://scripts/bits/player_finished.gd" id="13_jkv2x"]
+[ext_resource type="Script" uid="uid://m0fehjfpnp51" path="res://scripts/bits/delete.gd" id="14_jbj1t"]
 
 [sub_resource type="Animation" id="Animation_trceg"]
 length = 0.001
@@ -99,6 +101,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("LostScreen:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -648)]
 }
 
 [sub_resource type="Animation" id="Animation_eb6dy"]
@@ -226,6 +240,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [2]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LostScreen:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -648)]
+}
 
 [sub_resource type="Animation" id="Animation_a8y0u"]
 resource_name = "unpause"
@@ -290,9 +316,125 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_jbj1t"]
+resource_name = "game_to_lost"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LostScreen:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -648), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StartScreen:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -648)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InputLock:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MouseCapturer:update")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MouseCapturer:update_mouse_mode")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_muem4"]
+resource_name = "lost_to_game"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LostScreen:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -648)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InputLock:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MouseCapturer:update")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MouseCapturer:update_mouse_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jkv2x"]
 _data = {
 &"RESET": SubResource("Animation_trceg"),
+&"game_to_lost": SubResource("Animation_jbj1t"),
+&"lost_to_game": SubResource("Animation_muem4"),
 &"pause": SubResource("Animation_eb6dy"),
 &"start_to_game": SubResource("Animation_jkv2x"),
 &"unpause": SubResource("Animation_a8y0u")
@@ -407,6 +549,71 @@ script = ExtResource("10_dp3eg")
 group_name = "Main"
 metadata/_custom_type_script = "uid://bslmamakq2ao5"
 
+[node name="LostScreen" type="Panel" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -648.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/LostScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/LostScreen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 94
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 80
+text = "You Got Haunted..."
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 56
+text = "Again!"
+
+[node name="StartAnimation" type="Node" parent="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer/Button"]
+script = ExtResource("6_85g3d")
+animation = "lost_to_game"
+metadata/_custom_type_script = "uid://dw7w6pry2g435"
+
+[node name="Player" type="Node" parent="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer/Button/StartAnimation" node_paths=PackedStringArray("response")]
+script = ExtResource("4_jyhfs")
+response = NodePath("../../../../../../AnimationPlayer")
+metadata/_custom_type_script = "uid://b1o48vkwquyxs"
+
+[node name="MakeLevel" type="Node" parent="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer/Button"]
+script = ExtResource("5_eb6dy")
+metadata/_custom_type_script = "uid://chbr2ps15l74p"
+
+[node name="Level" type="Node" parent="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer/Button/MakeLevel"]
+script = ExtResource("13_jbj1t")
+response = ExtResource("1_ya4ey")
+metadata/_custom_type_script = "uid://b55vjdqvt4nkj"
+
+[node name="Main" type="Node" parent="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer/Button/MakeLevel"]
+script = ExtResource("10_dp3eg")
+group_name = "Main"
+metadata/_custom_type_script = "uid://bslmamakq2ao5"
+
 [node name="InputLock" type="Control" parent="CanvasLayer/UI"]
 visible = false
 layout_mode = 1
@@ -420,6 +627,7 @@ grow_vertical = 2
 libraries = {
 &"": SubResource("AnimationLibrary_jkv2x")
 }
+autoplay = "RESET"
 
 [node name="IsPlaying" type="Node" parent="CanvasLayer/UI/AnimationPlayer"]
 script = ExtResource("7_tipki")
@@ -435,6 +643,25 @@ script = ExtResource("4_jyhfs")
 response = NodePath("../../..")
 metadata/_custom_type_script = "uid://b1o48vkwquyxs"
 
+[node name="Lost" type="Node" parent="CanvasLayer/UI/AnimationPlayer"]
+script = ExtResource("13_jkv2x")
+animation = "game_to_lost"
+metadata/_custom_type_script = "uid://b7ecah37jx738"
+
+[node name="DeleteLevel" type="Node" parent="CanvasLayer/UI/AnimationPlayer/Lost"]
+script = ExtResource("14_jbj1t")
+metadata/_custom_type_script = "uid://m0fehjfpnp51"
+
+[node name="GetLevel" type="Node" parent="CanvasLayer/UI/AnimationPlayer/Lost/DeleteLevel"]
+script = ExtResource("10_dp3eg")
+group_name = "Level"
+metadata/_custom_type_script = "uid://bslmamakq2ao5"
+
+[node name="Player" type="Node" parent="CanvasLayer/UI/AnimationPlayer/Lost" node_paths=PackedStringArray("response")]
+script = ExtResource("4_jyhfs")
+response = NodePath("../..")
+metadata/_custom_type_script = "uid://b1o48vkwquyxs"
+
 [node name="MouseCapturer" type="Node" parent="CanvasLayer/UI"]
 script = ExtResource("10_choun")
 update_mouse_mode = 0
@@ -443,3 +670,6 @@ update = true
 [connection signal="just_true" from="CanvasLayer/UI/Pause" to="CanvasLayer/UI/Pauser" method="animate"]
 [connection signal="pressed" from="CanvasLayer/UI/StartScreen/MarginContainer/VBoxContainer/Button" to="CanvasLayer/UI/StartScreen/MarginContainer/VBoxContainer/Button/StartAnimation" method="animate"]
 [connection signal="pressed" from="CanvasLayer/UI/StartScreen/MarginContainer/VBoxContainer/Button" to="CanvasLayer/UI/StartScreen/MarginContainer/VBoxContainer/Button/MakeLevel" method="add"]
+[connection signal="pressed" from="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer/Button" to="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer/Button/StartAnimation" method="animate"]
+[connection signal="pressed" from="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer/Button" to="CanvasLayer/UI/LostScreen/MarginContainer/VBoxContainer/Button/MakeLevel" method="add"]
+[connection signal="finished" from="CanvasLayer/UI/AnimationPlayer/Lost" to="CanvasLayer/UI/AnimationPlayer/Lost/DeleteLevel" method="delete"]
