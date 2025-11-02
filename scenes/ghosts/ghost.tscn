@@ -139,6 +139,7 @@ mesh = SubResource("ArrayMesh_2f3dj")
 skeleton = NodePath("")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_layer = 4
 collision_mask = 17
 
 [node name="MoveMasterBit3D" type="Node" parent="CharacterBody3D"]
@@ -152,6 +153,10 @@ script = ExtResource("7_rww0w")
 script = ExtResource("4_jrho4")
 group_name = "Player"
 metadata/_custom_type_script = "uid://bslmamakq2ao5"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8507042, 0)
+shape = SubResource("CylinderShape3D_dp3eg")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 4

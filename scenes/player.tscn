@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bxd8ic56rg4x4"]
+[gd_scene load_steps=15 format=3 uid="uid://bxd8ic56rg4x4"]
 
 [ext_resource type="Script" uid="uid://cvqf1hrebc04p" path="res://scripts/bot.gd" id="1_y4r1p"]
 [ext_resource type="Script" uid="uid://b6iakww8271ns" path="res://scripts/bits/movemaster3d.gd" id="2_d2wvv"]
@@ -10,8 +10,6 @@
 [ext_resource type="Script" uid="uid://bmbnethi8oyh3" path="res://scripts/bits/areamaster3D.gd" id="8_d2wvv"]
 [ext_resource type="Script" uid="uid://d1caarqf4qo63" path="res://scripts/bits/health.gd" id="8_qfm1y"]
 [ext_resource type="Script" uid="uid://jcrs4htu8ysk" path="res://scripts/bits/areabits/3d/damage/single.gd" id="9_3v2ag"]
-[ext_resource type="Script" uid="uid://bc87fqj83okns" path="res://scripts/bits/property_modifier.gd" id="9_fulsm"]
-[ext_resource type="Script" uid="uid://d7n7ctdl2nsg" path="res://scripts/values/property.gd" id="10_4r5pv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jyhfs"]
 radius = 0.7
@@ -32,7 +30,6 @@ script = ExtResource("1_y4r1p")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 collision_layer = 2
-collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_jyhfs")
@@ -122,28 +119,3 @@ metadata/_custom_type_script = "uid://jcrs4htu8ysk"
 script = ExtResource("8_qfm1y")
 invincibility_time = 0.3
 metadata/_custom_type_script = "uid://d1caarqf4qo63"
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1361012, 0)
-text = "WHUwrt"
-
-[node name="PropertyModifier" type="Node" parent="Label3D"]
-script = ExtResource("9_fulsm")
-property = "text"
-constant = true
-metadata/_custom_type_script = "uid://bc87fqj83okns"
-
-[node name="ManualNode" type="Node" parent="Label3D/PropertyModifier" node_paths=PackedStringArray("response")]
-script = ExtResource("7_a8ls1")
-response = NodePath("../..")
-metadata/_custom_type_script = "uid://b1o48vkwquyxs"
-
-[node name="Property" type="Node" parent="Label3D/PropertyModifier"]
-script = ExtResource("10_4r5pv")
-property = "health"
-metadata/_custom_type_script = "uid://d7n7ctdl2nsg"
-
-[node name="ManualNode" type="Node" parent="Label3D/PropertyModifier/Property" node_paths=PackedStringArray("response")]
-script = ExtResource("7_a8ls1")
-response = NodePath("../../../../HealthBit")
-metadata/_custom_type_script = "uid://b1o48vkwquyxs"

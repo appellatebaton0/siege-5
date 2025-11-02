@@ -11,6 +11,13 @@ signal just_false ## Emitted when input's pressed and condition's true
 ## (Optional) The condition to modify the signal with.
 @export var condition:BoolValue
 
+func _ready() -> void:
+	if condition == null:
+		for child in get_children():
+			if child is BoolValue:
+				condition = child
+				break
+
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(input):
 		## If the condition exists, do what is required.
