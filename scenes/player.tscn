@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxd8ic56rg4x4"]
+[gd_scene load_steps=17 format=3 uid="uid://bxd8ic56rg4x4"]
 
 [ext_resource type="Script" uid="uid://cvqf1hrebc04p" path="res://scripts/bot.gd" id="1_y4r1p"]
 [ext_resource type="Script" uid="uid://b6iakww8271ns" path="res://scripts/bits/movemaster3d.gd" id="2_d2wvv"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://ctf2a2d7waikj" path="res://scripts/bits/movebits/3d/controlbits/wall_slide.gd" id="5_f1ej7"]
 [ext_resource type="Script" uid="uid://djhmxrvyb8qik" path="res://scripts/bits/camera3d.gd" id="6_oprun"]
 [ext_resource type="Script" uid="uid://b1o48vkwquyxs" path="res://scripts/values/node/manual_node.gd" id="7_a8ls1"]
+[ext_resource type="Script" uid="uid://bmbnethi8oyh3" path="res://scripts/bits/areamaster3D.gd" id="8_d2wvv"]
 [ext_resource type="Script" uid="uid://d1caarqf4qo63" path="res://scripts/bits/health.gd" id="8_qfm1y"]
+[ext_resource type="Script" uid="uid://jcrs4htu8ysk" path="res://scripts/bits/areabits/3d/damage/single.gd" id="9_3v2ag"]
 [ext_resource type="Script" uid="uid://bc87fqj83okns" path="res://scripts/bits/property_modifier.gd" id="9_fulsm"]
 [ext_resource type="Script" uid="uid://d7n7ctdl2nsg" path="res://scripts/values/property.gd" id="10_4r5pv"]
 
@@ -21,6 +23,9 @@ height = 3.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_ya4ey"]
 size = Vector3(0.1, 0.1, 0.3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jej6c"]
+points = PackedVector3Array(0, 0, 0, 5, 5, -18, 5, -5, -18, -5, 5, -18, -5, -5, -18)
 
 [node name="Player" type="Node3D" groups=["Player"]]
 script = ExtResource("1_y4r1p")
@@ -69,6 +74,7 @@ mesh = SubResource("BoxMesh_ya4ey")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" node_paths=PackedStringArray("y_target", "x_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2920494)
 script = ExtResource("6_oprun")
 y_target = NodePath("Player")
 x_target = NodePath("Head")
@@ -92,8 +98,25 @@ mesh = SubResource("BoxMesh_ya4ey")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5556563)
 light_energy = 1.898
 shadow_enabled = true
-spot_range = 30.0
-spot_angle = 42.19
+spot_range = 20.0
+spot_angle = 30.0
+
+[node name="Area3D" type="Area3D" parent="Head"]
+collision_layer = 16
+collision_mask = 4
+
+[node name="AreaMasterBit3D" type="Node" parent="Head/Area3D"]
+script = ExtResource("8_d2wvv")
+metadata/_custom_type_script = "uid://bmbnethi8oyh3"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Area3D"]
+shape = SubResource("ConvexPolygonShape3D_jej6c")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="SingleDamage3D" type="Node" parent="Head/Area3D"]
+script = ExtResource("9_3v2ag")
+collision_mask = 4
+metadata/_custom_type_script = "uid://jcrs4htu8ysk"
 
 [node name="HealthBit" type="Node" parent="."]
 script = ExtResource("8_qfm1y")

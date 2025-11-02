@@ -23,4 +23,5 @@ func value() -> Vector2:
 		real_node = node.value()
 	if real_node is Node2D:
 		return real_node.global_position if not local else real_node.position
+	
 	return Vector2.ZERO

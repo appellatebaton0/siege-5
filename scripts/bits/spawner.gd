@@ -6,7 +6,7 @@ class_name SpawnerBit extends Bit
 ## The PackedScene to use
 @export var scene:PackedSceneValue
 ## The position to spawn the nodes at
-@export var spawn_position:Vector2Value
+@export var spawn_position:VectorValue
 ## The rotation to spawn the nodes with (degrees).
 @export var spawn_rotation:FloatValue
 
@@ -22,13 +22,29 @@ var total_spawns := 0
 @export var concurrent_spawn_limit := -1
 var spawns:Array[Node]
 
-## Attempt to create and return a new node.
-func spawn_new() -> Node:
+## Attempt to create a new node.
+func spawn_new():
 	# Define the variables 
 	var parent_v:Node
 	var scene_v:PackedScene
-	var position_v:Vector2
+	var position_v
 	var rotation_v:float
+	
+	# Setup the scene value.
+	if scene != null:
+		scene_v = scene.value()
+	if scene_v == null:
+		push_error(self, " FAILED: NO SCENE")
+		return "NO SCENE"
+	
+	# Make the node
+	var new:Node = scene_v.instantiate()
+	
+	if new == null:
+		push_error(self, " FAILED TO SPAWN NODE: NO NODE")
+		return "NO NODE"
+	
+	print(new.get_class())
 	
 	# Attempt to set them
 	if parent != null:
@@ -36,10 +52,7 @@ func spawn_new() -> Node:
 	else:
 		parent_v = self
 	
-	if scene != null:
-		scene_v = scene.value()
-	if scene_v == null:
-		return null # Can't make a node from nothing :(
+	
 	
 	if spawn_position != null:
 		position_v = spawn_position.value()
@@ -48,32 +61,34 @@ func spawn_new() -> Node:
 	else:
 		position_v = Vector2.ZERO
 	
-	if bot.is_class("Node2D"): ## Offset by the bot if needed
+	if bot.is_class("Node2D") or bot.is_class("Node3D"): ## Offset by the bot if needed
 		position_v += bot.global_position
 	
 	if spawn_rotation != null:
 		rotation_v = spawn_rotation.value()
-	elif is_class("Node2D"):
+	elif is_class("Node2D") or is_class("Node3D"):
 		rotation_v = self.rotation
-	elif bot.is_class("Node2D"):
+	elif bot.is_class("Node2D") or bot.is_class("Node3D"):
 		rotation_v = bot.rotation
 	else:
 		rotation_v = 0.0
 	
 	# Now that all the values FINALLY exist, make and return the node;
 	
-	var new:Node = scene_v.instantiate()
+	
 	
 	parent_v.add_child(new)
 	
-	if new is Node2D:
+	if new is Node2D or new is Node3D:
 		new.global_position = position_v
 		new.rotation = rotation_v
 	
 	total_spawns += 1
 	spawns.append(new)
 	
-	return new
+	
+	if parent_v == null:
+		push_error(self, " FAILED TO SPAWN NODE: NO PARENT")
 
 ## Try to get a new interval.
 func renew_interval() -> void:

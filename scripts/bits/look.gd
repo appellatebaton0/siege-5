@@ -18,6 +18,9 @@ class_name LookBit extends Bit
 @export var look_y := true
 @export var look_z := true
 
+func vec3_rad_to_deg(a:Vector3) -> Vector3:
+	return Vector3(rad_to_deg(a.x),rad_to_deg(a.y),rad_to_deg(a.z))
+
 func vec3_move_towards(a:Vector3, b:Vector3, delta:float):
 	return Vector3(move_toward(a.x, b.x, delta), move_toward(a.y, b.y, delta), move_toward(a.z, b.z, delta))
 

@@ -73,6 +73,7 @@ up={
 2d_physics/layer_3="Environment"
 3d_physics/layer_3="Ghost"
 3d_physics/layer_4="Bullet"
+3d_physics/layer_5="LineOfSight"
 
 [rendering]
 
