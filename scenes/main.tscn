@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dxycgxp18qyay"]
+[gd_scene load_steps=25 format=3 uid="uid://dxycgxp18qyay"]
 
 [ext_resource type="PackedScene" uid="uid://b3gr5rbtu1ff" path="res://scenes/level.tscn" id="1_ya4ey"]
 [ext_resource type="Script" uid="uid://nege5nk1sa8u" path="res://scripts/values/bool/and.gd" id="3_eb6dy"]
@@ -15,6 +15,18 @@
 [ext_resource type="Script" uid="uid://b55vjdqvt4nkj" path="res://scripts/values/packed_scene/manual_packedscene.gd" id="13_jbj1t"]
 [ext_resource type="Script" uid="uid://b7ecah37jx738" path="res://scripts/bits/player_finished.gd" id="13_jkv2x"]
 [ext_resource type="Script" uid="uid://m0fehjfpnp51" path="res://scripts/bits/delete.gd" id="14_jbj1t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkv2x"]
+bg_color = Color(0.36424, 0.22039999, 0.58, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.20784314, 0.14901961, 0.29411766, 1)
+border_blend = true
+
+[sub_resource type="Theme" id="Theme_jbj1t"]
+Panel/styles/panel = SubResource("StyleBoxFlat_jkv2x")
 
 [sub_resource type="Animation" id="Animation_trceg"]
 length = 0.001
@@ -452,6 +464,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_jbj1t")
 
 [node name="Pause" type="Node" parent="CanvasLayer/UI"]
 script = ExtResource("5_tipki")

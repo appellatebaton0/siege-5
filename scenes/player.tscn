@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bxd8ic56rg4x4"]
+[gd_scene load_steps=22 format=3 uid="uid://bxd8ic56rg4x4"]
 
 [ext_resource type="Script" uid="uid://cvqf1hrebc04p" path="res://scripts/bot.gd" id="1_y4r1p"]
 [ext_resource type="Script" uid="uid://b6iakww8271ns" path="res://scripts/bits/movemaster3d.gd" id="2_d2wvv"]
@@ -29,6 +29,12 @@ size = Vector3(0.1, 0.1, 0.3)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jej6c"]
 points = PackedVector3Array(0, 0, 0, 5, 5, -18, 5, -5, -18, -5, 5, -18, -5, -5, -18)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oprun"]
+bg_color = Color(0.6, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8ls1"]
+bg_color = Color(0.01999998, 0.6, 0, 1)
 
 [node name="Player" type="Node3D" groups=["Player"]]
 script = ExtResource("1_y4r1p")
@@ -160,8 +166,11 @@ theme_override_constants/margin_bottom = 30
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/MarginContainer"]
 custom_minimum_size = Vector2(400, 35)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_oprun")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a8ls1")
 max_value = 40.0
+value = 20.0
 show_percentage = false
 
 [node name="PropertyModifier" type="Node" parent="CanvasLayer/MarginContainer/ProgressBar"]
